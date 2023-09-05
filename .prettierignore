@@ -1,0 +1,4 @@
+vendor/
+ios/Pods/
+bundle/
+build/
