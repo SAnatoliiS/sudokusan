@@ -8,13 +8,10 @@ module.exports = {
     ],
     plugins: ['@babel', '@typescript-eslint', 'module-resolver', 'import'],
     rules: {
-        'no-use-before-define': ['error', {variables: false}],
-        'react/jsx-filename-extension': [
-            1,
-            {
-                extensions: ['.js', '.jsx', '.tsx'],
-            },
-        ],
+        'arrow-body-style': 'off',
+
+        'no-use-before-define': ['error', { variables: false }],
+
         'import/extensions': [
             'error',
             'ignorePackages',
@@ -25,7 +22,15 @@ module.exports = {
                 tsx: 'never',
             },
         ],
-        'import/no-cycle': [2, {maxDepth: 1}],
+        'import/no-cycle': [2, { maxDepth: 1 }],
+        'import/prefer-default-export': 'off',
+
+        'react/jsx-filename-extension': [
+            1,
+            {
+                extensions: ['.js', '.jsx', '.tsx'],
+            },
+        ],
     },
     settings: {
         'import/resolver': {
