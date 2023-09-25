@@ -8,6 +8,8 @@ module.exports = {
     ],
     plugins: ['@babel', '@typescript-eslint', 'module-resolver', 'import'],
     rules: {
+        '@typescript-eslint/no-shadow': ['error'], // to deal with Enums properly
+
         'arrow-body-style': 'off',
 
         'no-use-before-define': ['error', { variables: false }],
@@ -31,6 +33,8 @@ module.exports = {
                 extensions: ['.js', '.jsx', '.tsx'],
             },
         ],
+
+        'no-shadow': 'off', // to deal with enums properly
     },
     settings: {
         'import/resolver': {

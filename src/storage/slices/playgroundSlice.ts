@@ -4,12 +4,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { Cell, Formation, FormationSize, SolutionCell } from '../types';
+import { Cell, Formation, FormationDimensions, SolutionCell } from '../types';
 
 interface PlaygroundState {
     currentFormation: Formation<Cell>;
     solutionFormation: Formation<SolutionCell>;
-    size: FormationSize;
+    size: FormationDimensions;
 }
 
 const initialState: PlaygroundState = {
@@ -37,7 +37,7 @@ export const playgroundSlice = createSlice({
         setCurrentFormation: (state, action: PayloadAction<Formation<Cell>>) => {
             state.currentFormation = action.payload;
         },
-        setSize: (state, action: PayloadAction<FormationSize>) => {
+        setSize: (state, action: PayloadAction<FormationDimensions>) => {
             state.size = action.payload;
         },
         openCell: (state, action: PayloadAction<{ row: number; column: number }>) => {

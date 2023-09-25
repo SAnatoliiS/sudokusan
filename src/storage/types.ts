@@ -1,5 +1,5 @@
 // Size of the playground
-export interface FormationSize {
+export interface FormationDimensions {
     width: number;
     height: number;
     sectorWidth: number;
