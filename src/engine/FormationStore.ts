@@ -1,6 +1,5 @@
-import { createSolutionFormation } from './createSolutionFormation';
+import { createSolutionFormation, getInitialFormation } from './formationGenerator';
 import { getFormationWithOpenCell } from './getFormationWithOpenedCell';
-import { getInitialFormation } from './getInitialFormation';
 import { Formation, SolutionCell, CellValidationResult, CellValue, GameConfig } from './types';
 import { validateValue } from './validateValue';
 

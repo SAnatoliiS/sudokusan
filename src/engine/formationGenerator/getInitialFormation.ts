@@ -1,4 +1,4 @@
-import { Formation, SolutionCell } from './types';
+import { Formation, SolutionCell } from '../types';
 
 /**
  * Returns a new formation with some cells removed from the input formation.
