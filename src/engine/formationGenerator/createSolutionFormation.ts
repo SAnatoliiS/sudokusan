@@ -30,12 +30,3 @@ export const createSolutionFormation = (
     console.log(`Solution generation took ${endTime - startTime} milliseconds.`);
     return resultFormation;
 };
-
-const logFormation = (formation: Formation) => {
-    for (let i = 0; i < formation.rows.length; i += 1) {
-        console.log(formation.rows[i].map(cell => cell.value).join(' '));
-    }
-};
-
-const solutionFormation = createSolutionFormation({ size: 16, blockWidth: 4, blockHeight: 4 });
-logFormation(solutionFormation);
