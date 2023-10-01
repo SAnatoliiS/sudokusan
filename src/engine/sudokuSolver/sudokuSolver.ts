@@ -1,7 +1,7 @@
 // Note: This is a port of the DLX algorithm from the Dancing Links paper by Donald Knuth.
 import { DoX } from './DoX';
 import { addBelow, addRight } from './addHelpers';
-import { search } from './algoritmXSearch';
+import { search } from './algorithmXSearch';
 import { convertSolutionToArray } from './convertSolutionToArray';
 import { getError } from './getError';
 import { gridMeta } from './gridMeta';
