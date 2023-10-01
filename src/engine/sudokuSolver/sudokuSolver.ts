@@ -13,7 +13,7 @@ import type { Config, SudokuSolutions } from './types';
  * Donald Knuth's DLX algorithm to solve it.
  * @param puzzle
  */
-export function getSudokuSolutions(
+export function solveSudoku(
     puzzle: number[][],
     config: Config,
     maxSolutionCount = 2,

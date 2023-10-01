@@ -1,8 +1,8 @@
 // Tests for sudokuSolver.ts
-import { getSudokuSolutions } from './sudokuSolver';
+import { solveSudoku } from './sudokuSolver';
 import { SudokuSolverError, type Config } from './types';
 
-describe('getSudokuSolutions', () => {
+describe('solveSudoku', () => {
     it('Should return 2 solutions and the MoreThanOneSolution error for 9x9 sudoku.', () => {
         const puzzle = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -19,7 +19,7 @@ describe('getSudokuSolutions', () => {
             blockWidth: 3,
             blockHeight: 3,
         };
-        const solutions = getSudokuSolutions(puzzle, config);
+        const solutions = solveSudoku(puzzle, config);
         expect(solutions.result.length).toEqual(2);
         expect(solutions.error).toEqual(SudokuSolverError.MoreThanOneSolution);
     });
@@ -36,7 +36,7 @@ describe('getSudokuSolutions', () => {
             blockWidth: 3,
             blockHeight: 2,
         };
-        const solutions = getSudokuSolutions(puzzle, config);
+        const solutions = solveSudoku(puzzle, config);
         expect(solutions.result.length).toEqual(1);
         expect(solutions.error).toBeNull();
     });
@@ -51,7 +51,7 @@ describe('getSudokuSolutions', () => {
             blockWidth: 2,
             blockHeight: 2,
         };
-        const solutions = getSudokuSolutions(puzzle, config);
+        const solutions = solveSudoku(puzzle, config);
         expect(solutions.result.length).toEqual(1);
         expect(solutions.error).toBeNull();
     });
@@ -71,7 +71,7 @@ describe('getSudokuSolutions', () => {
             blockWidth: 3,
             blockHeight: 3,
         };
-        const solutions = getSudokuSolutions(puzzle, config);
+        const solutions = solveSudoku(puzzle, config);
         expect(solutions.result.length).toEqual(1);
         expect(solutions.error).toBeNull();
     });
@@ -92,7 +92,7 @@ describe('getSudokuSolutions', () => {
             blockWidth: 3,
             blockHeight: 3,
         };
-        const solutions = getSudokuSolutions(puzzle, config);
+        const solutions = solveSudoku(puzzle, config);
         expect(solutions.result.length).toEqual(0);
         expect(solutions.error).toEqual(SudokuSolverError.NoSolutions);
     });
