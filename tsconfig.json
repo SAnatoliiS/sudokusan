@@ -4,6 +4,7 @@
         "paths": {
             "@components/*": ["./src/components/*"],
             "@storage": ["./src/storage"]
-        }
+        },
+        "sourceMap": true
     }
 }

@@ -9,6 +9,10 @@ module.exports = {
     plugins: ['@babel', '@typescript-eslint', 'module-resolver', 'import'],
     rules: {
         '@typescript-eslint/no-shadow': ['error'], // to deal with Enums properly
+        '@typescript-eslint/no-unused-vars': [
+            'error',
+            { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        ],
 
         'arrow-body-style': 'off',
 
