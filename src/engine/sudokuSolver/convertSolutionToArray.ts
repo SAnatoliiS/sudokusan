@@ -4,9 +4,8 @@ import { DoX } from './DoX';
 /**
  * @param size The size of the grid. 9 for a 9x9 sudoku.
  */
-export const convertSolutionToArray =
-    (size: number) =>
-    (a: DoX[]): number[][] => {
+export function convertSolutionToArray(size: number) {
+    return (a: DoX[]): number[][] => {
         const result = new Array(size).fill(null).map(() => new Array(size).fill(0));
         return a.reduce((p: number[][], c: DoX) => {
             // Lets make 2d array of 0s
@@ -18,3 +17,4 @@ export const convertSolutionToArray =
             return p;
         }, result);
     };
+}

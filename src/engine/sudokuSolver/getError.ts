@@ -1,7 +1,7 @@
 import { DoX } from './DoX';
 import { SudokuSolverError } from './types';
 
-export const getError = (solutions: DoX[][]): SudokuSolverError | null => {
+export function getError(solutions: DoX[][]): SudokuSolverError | null {
     if (solutions.length === 0) {
         return SudokuSolverError.NoSolutions;
     }
@@ -9,4 +9,4 @@ export const getError = (solutions: DoX[][]): SudokuSolverError | null => {
         return SudokuSolverError.MoreThanOneSolution;
     }
     return null;
-};
+}

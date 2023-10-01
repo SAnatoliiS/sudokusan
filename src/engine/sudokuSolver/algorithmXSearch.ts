@@ -2,6 +2,55 @@
 import { DoX } from './DoX';
 
 /**
+ * Verbatim copy of DK's chooseColumn algorithm.
+ * @param h The root node.
+ * @return
+ */
+function chooseColumn(h: DoX): DoX {
+    let s = Number.POSITIVE_INFINITY;
+    let c = h;
+    for (let j = h.R; j !== h; j = j.R) {
+        if (j.S < s) {
+            c = j;
+            s = j.S;
+        }
+    }
+    return c;
+}
+
+/**
+ * Verbatim copy of DK's cover algorithm
+ * @param c
+ */
+function cover(c: DoX): void {
+    c.L.R = c.R;
+    c.R.L = c.L;
+    for (let i: DoX = c.D; i !== c; i = i.D) {
+        for (let j: DoX = i.R; j !== i; j = j.R) {
+            j.U.D = j.D;
+            j.D.U = j.U;
+            j.H.S -= 1;
+        }
+    }
+}
+
+/**
+ * Verbatim copy of DK's uncover algorithm
+ * @param c
+ */
+function uncover(c: DoX): void {
+    for (let i: DoX = c.U; i !== c; i = i.U) {
+        for (let j: DoX = i.L; i !== j; j = j.L) {
+            j.H.S += 1;
+            j.U.D = j;
+            j.D.U = j;
+        }
+    }
+    c.L.R = c;
+    c.R.L = c;
+}
+
+/**
  * Verbatim copy of DK's search algorithm. The meat of the DLX algorithm.
  * @param h The root node.
  * @param s The solution array.
@@ -39,52 +88,3 @@ export function search(
     uncover(c);
     return newSolutions.concat(solutions);
 }
-
-/**
- * Verbatim copy of DK's chooseColumn algorithm.
- * @param h The root node.
- * @return
- */
-const chooseColumn = (h: DoX): DoX => {
-    let s = Number.POSITIVE_INFINITY;
-    let c = h;
-    for (let j = h.R; j !== h; j = j.R) {
-        if (j.S < s) {
-            c = j;
-            s = j.S;
-        }
-    }
-    return c;
-};
-
-/**
- * Verbatim copy of DK's cover algorithm
- * @param c
- */
-const cover = (c: DoX): void => {
-    c.L.R = c.R;
-    c.R.L = c.L;
-    for (let i: DoX = c.D; i !== c; i = i.D) {
-        for (let j: DoX = i.R; j !== i; j = j.R) {
-            j.U.D = j.D;
-            j.D.U = j.U;
-            j.H.S -= 1;
-        }
-    }
-};
-
-/**
- * Verbatim copy of DK's uncover algorithm
- * @param c
- */
-const uncover = (c: DoX): void => {
-    for (let i: DoX = c.U; i !== c; i = i.U) {
-        for (let j: DoX = i.L; i !== j; j = j.L) {
-            j.H.S += 1;
-            j.U.D = j;
-            j.D.U = j;
-        }
-    }
-    c.L.R = c;
-    c.R.L = c;
-};

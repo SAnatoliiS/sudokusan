@@ -8,9 +8,8 @@ import { Indexes } from './types';
  * @param blockHeight The height of a block.
  * @return A function that takes an index and returns the row, column and block indexes.
  */
-export const indexesHelper =
-    (size: number, blockWidth: number, blockHeight: number) =>
-    (cellIndex: number): Indexes => {
+export function indexesHelper(size: number, blockWidth: number, blockHeight: number) {
+    return (cellIndex: number): Indexes => {
         const rowIndex = Math.floor(cellIndex / size);
         const columnIndex = cellIndex % size;
         const blockIndex =
@@ -18,3 +17,4 @@ export const indexesHelper =
             Math.floor(columnIndex / blockWidth);
         return { rowIndex, columnIndex, blockIndex };
     };
+}

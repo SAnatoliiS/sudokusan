@@ -13,11 +13,11 @@ import type { Config, SudokuSolutions } from './types';
  * Donald Knuth's DLX algorithm to solve it.
  * @param puzzle
  */
-export const getSudokuSolutions = (
+export function getSudokuSolutions(
     puzzle: number[][],
     config: Config,
     maxSolutionCount = 2,
-): SudokuSolutions => {
+): SudokuSolutions {
     const { blockWidth, blockHeight } = config;
     const size = puzzle.length;
     const {
@@ -82,4 +82,4 @@ export const getSudokuSolutions = (
         error: getError(solutions),
         result: solutions.slice(0, maxSolutionCount).map(convertSolutionToArray(size)),
     };
-};
+}
