@@ -3,8 +3,8 @@ module.exports = {
     extends: [
         'airbnb',
         'plugin:@typescript-eslint/recommended',
-        'prettier',
         'plugin:react-hooks/recommended',
+        'prettier',
     ],
     plugins: ['@babel', '@typescript-eslint', 'module-resolver', 'import'],
     rules: {
@@ -16,6 +16,7 @@ module.exports = {
 
         'arrow-body-style': 'off',
 
+        'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-use-before-define': ['error', { variables: false }],
 
         'import/extensions': [

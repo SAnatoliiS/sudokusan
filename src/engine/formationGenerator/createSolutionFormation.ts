@@ -2,7 +2,8 @@
 import { generateBaseFormation } from './generateBaseFormation';
 import { randomSwapOperations } from './randomSwapOperations';
 import { Formation, FormationDimensions, SolutionCell } from '../types';
-import { constants } from './constants';
+import { Constants } from './constants';
+import { checkFormation } from './checkFormation';
 
 /**
  * Creates a formation of solution cells for a given size.
@@ -11,14 +12,16 @@ import { constants } from './constants';
  */
 export const createSolutionFormation = (
     formationDimensions: FormationDimensions,
+    measurePerformance = true,
 ): Formation<SolutionCell> => {
     // lets measure the time it takes to generate the solution
-    const startTime = performance.now();
+    const startTime = measurePerformance ? Date.now() : 0;
+
     const baseFormation = generateBaseFormation(formationDimensions);
 
     const numberOfSwaps =
-        Math.floor(Math.random() * constants.minimumSwapActionCount) +
-        constants.minimumSwapActionCount;
+        Math.floor(Math.random() * Constants.minimumSwapActionCount) +
+        Constants.minimumSwapActionCount;
     let resultFormation = baseFormation;
     for (let i = 0; i < numberOfSwaps; i += 1) {
         const randomSwapOperation =
@@ -26,7 +29,16 @@ export const createSolutionFormation = (
         resultFormation = randomSwapOperation(resultFormation, formationDimensions);
     }
 
-    const endTime = performance.now();
-    console.log(`Solution generation took ${endTime - startTime} milliseconds.`);
+    const error = checkFormation(resultFormation, formationDimensions);
+
+    if (error) {
+        console.error(`createSolutionFormation: ${error}`);
+        createSolutionFormation(formationDimensions, false);
+    }
+
+    const endTime = measurePerformance ? Date.now() : 0;
+    if (measurePerformance && startTime && endTime) {
+        console.log(`Solution generation took ${endTime - startTime} milliseconds.`);
+    }
     return resultFormation;
 };

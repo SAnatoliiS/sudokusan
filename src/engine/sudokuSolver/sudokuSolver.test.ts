@@ -1,6 +1,6 @@
 // Tests for sudokuSolver.ts
 import { solveSudoku } from './sudokuSolver';
-import { SudokuSolverError, type Config } from './types';
+import { SudokuSolverError, Config } from './types';
 
 describe('solveSudoku', () => {
     it('Should return 2 solutions and the MoreThanOneSolution error for 9x9 sudoku.', () => {

@@ -1,5 +1,5 @@
 import { createSolutionFormation, getInitialFormation } from './formationGenerator';
-import { getFormationWithOpenCell } from './getFormationWithOpenedCell';
+import { getFormationWithChangedCell } from './getFormationWithChangedCell';
 import { Formation, SolutionCell, CellValidationResult, CellValue, GameConfig } from './types';
 import { validateValue } from './validateValue';
 
@@ -12,7 +12,7 @@ export class FormationStore {
 
     constructor(config: GameConfig) {
         this.solutionFormation = createSolutionFormation(config.dimensions);
-        this.currentFormation = getInitialFormation(this.solutionFormation);
+        this.currentFormation = getInitialFormation(this.solutionFormation, config);
         this.config = config;
     }
 
@@ -39,7 +39,7 @@ export class FormationStore {
             this.config.dimensions,
         );
         if (validationResult === CellValidationResult.Valid) {
-            const newFormation = getFormationWithOpenCell(
+            const newFormation = getFormationWithChangedCell(
                 this.currentFormation,
                 row,
                 column,

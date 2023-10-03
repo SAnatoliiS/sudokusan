@@ -5,9 +5,18 @@ export interface FormationDimensions {
     blockHeight: number;
 }
 
+export enum Difficulty {
+    Easy,
+    Medium,
+    Hard,
+    Expert,
+    Devil,
+}
+
 export interface GameConfig {
     dimensions: FormationDimensions;
     autoErrorChecking: boolean;
+    difficulty: Difficulty;
 }
 
 export type CellValue = number | null;
