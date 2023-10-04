@@ -15,7 +15,10 @@ export enum Difficulty {
 
 export interface GameConfig {
     dimensions: FormationDimensions;
-    autoErrorChecking: boolean;
+    validation: {
+        checkForConflictsOnInsert: boolean;
+        checkForWrongValuesOnInsert: boolean;
+    };
     difficulty: Difficulty;
 }
 
@@ -36,12 +39,22 @@ export interface Formation<T extends Cell | SolutionCell = Cell> {
     rows: Row<T>[];
 }
 
-export enum CellValidationResult {
+export enum CellValidationError {
     AlreadySet = 'already-set',
     AlreadyInRow = 'already-in-row',
     AlreadyInColumn = 'already-in-column',
     AlreadyInBlock = 'already-in-block',
-    InvalidValue = 'invalid-value',
+    WrongValue = 'wrong-value',
     OutOfBounds = 'out-of-bounds',
-    Valid = 'valid',
+}
+
+export interface ConflictingCellCoordinates {
+    error: CellValidationError;
+    row: number;
+    column: number;
+}
+
+export interface CellValidationResult {
+    errors: CellValidationError[];
+    conflictingCellCoordinates: ConflictingCellCoordinates[];
 }
