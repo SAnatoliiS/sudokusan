@@ -3,7 +3,7 @@ import { getFormationWithChangedCell } from './getFormationWithChangedCell';
 import { Formation, SolutionCell, CellValidationResult, CellValue, GameConfig } from './types';
 import { validateValue } from './validateValue';
 
-export class FormationStore {
+export class SudokuStore {
     private solutionFormation: Formation<SolutionCell>;
 
     private currentFormation: Formation;

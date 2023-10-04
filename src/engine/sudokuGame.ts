@@ -1,10 +1,10 @@
 import { GameConfig } from './types';
-import { FormationStore } from './FormationStore';
+import { SudokuStore } from './SudokuStore';
 
 export const newGame = (config: GameConfig) => {
-    const formationStore = new FormationStore(config);
+    const sudokuStore = new SudokuStore(config);
 
     return {
-        formation: formationStore,
+        formation: sudokuStore,
     };
 };
