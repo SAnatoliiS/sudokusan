@@ -5,6 +5,7 @@
     "scripts": {
         "android": "react-native run-android",
         "ios": "react-native run-ios",
+        "tsc": "tsc",
         "lint": "eslint .",
         "start": "react-native start",
         "prettier:check": "prettier --check .",

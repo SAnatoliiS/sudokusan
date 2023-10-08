@@ -3,7 +3,6 @@ import { generateBaseFormation } from './generateBaseFormation';
 import { randomSwapOperations } from './randomSwapOperations';
 import { Formation, FormationDimensions, SolutionCell } from '../types';
 import { Constants } from './constants';
-import { checkFormation } from './checkFormation';
 
 /**
  * Creates a formation of solution cells for a given size.
@@ -27,13 +26,6 @@ export const createSolutionFormation = (
         const randomSwapOperation =
             randomSwapOperations[Math.floor(Math.random() * randomSwapOperations.length)];
         resultFormation = randomSwapOperation(resultFormation, formationDimensions);
-    }
-
-    const error = checkFormation(resultFormation, formationDimensions);
-
-    if (error) {
-        console.error(`createSolutionFormation: ${error}`);
-        createSolutionFormation(formationDimensions, false);
     }
 
     const endTime = measurePerformance ? Date.now() : 0;

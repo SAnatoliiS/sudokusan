@@ -4,6 +4,11 @@ import type { Cell, Formation, GameConfig, SolutionCell } from '../types';
 import { checkFormation } from './checkFormation';
 import { getAdditionalOpenedCells } from './getAdditionalOpenedCells';
 
+const ClosedCell: Cell = {
+    value: null,
+    fixed: false,
+};
+
 function openRandomCell(
     formation: Formation,
     solutionFormation: Formation<SolutionCell>,
@@ -23,12 +28,11 @@ function openRandomCell(
         const column = Math.floor(Math.random() * formationSize);
 
         if (resultFormation.rows[row][column].value === null) {
-            resultFormation = getFormationWithChangedCell(
-                resultFormation,
-                row,
-                column,
-                solutionFormation.rows[row][column].value,
-            );
+            const newCell = {
+                value: solutionFormation.rows[row][column].value,
+                fixed: true,
+            };
+            resultFormation = getFormationWithChangedCell(resultFormation, row, column, newCell);
             openedCellCount += 1;
         }
     }
@@ -52,7 +56,7 @@ function closeRandomCell(formation: Formation): Formation {
         const column = Math.floor(Math.random() * formationSize);
 
         if (resultFormation.rows[row][column].value !== null) {
-            resultFormation = getFormationWithChangedCell(resultFormation, row, column, null);
+            resultFormation = getFormationWithChangedCell(resultFormation, row, column, ClosedCell);
             closedCellCount += 1;
         }
     }
@@ -99,9 +103,7 @@ export const getInitialFormation = (
         .map(() =>
             Array(solutionFormation.rows.length)
                 .fill(null)
-                .map(() => ({
-                    value: null,
-                })),
+                .map(() => ClosedCell),
         );
 
     let resultFormation = { ...solutionFormation, rows: resultRows };
@@ -133,12 +135,12 @@ export const getInitialFormation = (
         openedCellCount,
     );
 
-    const resultFormation1 = makeCertainNumberOfOpenCells(
+    resultFormation = makeCertainNumberOfOpenCells(
         resultFormation,
         solutionFormation,
         openedCellCount,
         openedCellCount + additionalOpenedCellsCount,
     );
 
-    return resultFormation1;
+    return resultFormation;
 };

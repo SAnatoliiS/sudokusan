@@ -1,23 +1,21 @@
-import { History } from './History';
 import { createSolutionFormation, getInitialFormation } from './formationGenerator';
 import { getFormationWithChangedCell } from './getFormationWithChangedCell';
-import { Formation, SolutionCell, CellValidationResult, CellValue, GameConfig } from './types';
-import { validateValue } from './validateValue';
+import { Formation, SolutionCell, CellValue, Cell, SudokuStoreInitializationParams } from './types';
 
 export class SudokuStore {
     private solutionFormation: Formation<SolutionCell>;
 
     private currentFormation: Formation;
 
-    private history: History;
-
-    private config: GameConfig;
-
-    constructor(config: GameConfig) {
-        this.solutionFormation = createSolutionFormation(config.dimensions);
-        this.currentFormation = getInitialFormation(this.solutionFormation, config);
-        this.history = new History();
-        this.config = config;
+    constructor({ config, restoreGame }: SudokuStoreInitializationParams) {
+        if (restoreGame) {
+            const { solutionFormation, currentFormation } = restoreGame;
+            this.solutionFormation = solutionFormation;
+            this.currentFormation = currentFormation;
+        } else {
+            this.solutionFormation = createSolutionFormation(config.dimensions);
+            this.currentFormation = getInitialFormation(this.solutionFormation, config);
+        }
     }
 
     public getFormation(): Formation {
@@ -32,55 +30,17 @@ export class SudokuStore {
         return this.solutionFormation;
     }
 
-    public assumeValueAtCoordinates(
-        value: CellValue,
-        row: number,
-        column: number,
-    ): {
-        validationResult: CellValidationResult;
-        newFormation: Formation;
-    } {
-        const validationResult: CellValidationResult = validateValue(
-            this.currentFormation,
-            this.solutionFormation,
-            row,
-            column,
+    public insertValueByCoordinates(value: CellValue, row: number, column: number) {
+        const newFormation = getFormationWithChangedCell(this.currentFormation, row, column, {
             value,
-            this.config,
-        );
-        if (validationResult.errors.length === 0) {
-            this.insertValueByCoordinate(value, row, column);
-        }
-
-        return {
-            validationResult,
-            newFormation: this.currentFormation,
-        };
-    }
-
-    public eraseValueAtCoordinates(row: number, column: number): Formation {
-        const validationResult: CellValidationResult = validateValue(
-            this.currentFormation,
-            this.solutionFormation,
-            row,
-            column,
-            null,
-            this.config,
-        );
-        if (validationResult.errors.length === 0) {
-            this.insertValueByCoordinate(null, row, column);
-        }
-        return this.currentFormation;
-    }
-
-    private insertValueByCoordinate(value: CellValue, row: number, column: number) {
-        const newFormation = getFormationWithChangedCell(this.currentFormation, row, column, value);
-        this.setFormation(newFormation);
-        this.history.addMove({
-            row,
-            column,
-            value,
+            fixed: false,
         });
+        this.setFormation(newFormation);
+    }
+
+    public insertCellByCoordinates(cell: Cell, row: number, column: number) {
+        const newFormation = getFormationWithChangedCell(this.currentFormation, row, column, cell);
+        this.setFormation(newFormation);
     }
 
     /*

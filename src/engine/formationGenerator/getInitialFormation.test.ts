@@ -10,7 +10,10 @@ describe('getInitialFormation', () => {
         const initialFormation = getInitialFormation(solutionFormation, {
             difficulty: Difficulty.Easy,
             dimensions: { size: 9, blockWidth: 3, blockHeight: 3 },
-            autoErrorChecking: true,
+            validation: {
+                checkForConflictsOnInsert: true,
+                checkForWrongValuesOnInsert: true,
+            },
         });
 
         const sudokuError = checkFormation(initialFormation, dimensions);

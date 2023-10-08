@@ -26,10 +26,11 @@ export type CellValue = number | null;
 
 export interface Cell {
     value: CellValue;
+    fixed: boolean;
 }
 
-export interface SolutionCell extends Cell {
-    value: NonNullable<Cell['value']>;
+export interface SolutionCell {
+    value: NonNullable<CellValue>;
 }
 
 export type Row<T extends Cell | SolutionCell = Cell> = T[];
@@ -57,4 +58,27 @@ export interface ConflictingCellCoordinates {
 export interface CellValidationResult {
     errors: CellValidationError[];
     conflictingCellCoordinates: ConflictingCellCoordinates[];
+}
+
+export interface Move {
+    row: number;
+    column: number;
+    value: CellValue;
+}
+
+export interface SudokuGameInitializationParams {
+    config: GameConfig;
+    restoreGame?: {
+        moveHistory: Move[];
+        solutionFormation: Formation<SolutionCell>;
+        currentFormation: Formation;
+    };
+}
+
+export interface SudokuStoreInitializationParams {
+    config: GameConfig;
+    restoreGame?: {
+        solutionFormation: Formation<SolutionCell>;
+        currentFormation: Formation;
+    };
 }

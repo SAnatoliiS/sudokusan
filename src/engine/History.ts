@@ -1,10 +1,4 @@
-import { CellValue } from './types';
-
-interface Move {
-    row: number;
-    column: number;
-    value: CellValue;
-}
+import { Move } from './types';
 
 export class History {
     private history: Move[];
@@ -19,5 +13,9 @@ export class History {
 
     undoLastMove(): Move | undefined {
         return this.history.pop();
+    }
+
+    getMoveHistory(): Move[] {
+        return this.history;
     }
 }
