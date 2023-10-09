@@ -1,5 +1,5 @@
 // Tests for sudokuSolver.ts
-import { solveSudoku } from './sudokuSolver';
+import { solveSudoku } from './solveSudoku';
 import { SudokuSolverError, Config } from './types';
 
 describe('solveSudoku', () => {

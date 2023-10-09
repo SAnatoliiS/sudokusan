@@ -1,5 +1,5 @@
 import { getFormationWithChangedCell } from '../getFormationWithChangedCell';
-import { SudokuSolverError } from '../sudokuSolver';
+import { SudokuSolverError } from '../solveSudoku';
 import type { Cell, Formation, GameConfig, SolutionCell } from '../types';
 import { checkFormation } from './checkFormation';
 import { getAdditionalOpenedCells } from './getAdditionalOpenedCells';

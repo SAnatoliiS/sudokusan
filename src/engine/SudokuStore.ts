@@ -1,4 +1,4 @@
-import { createSolutionFormation, getInitialFormation } from './formationGenerator';
+import { createSolutionFormation, getInitialFormation } from './createSolutionFormation';
 import { getFormationWithChangedCell } from './getFormationWithChangedCell';
 import { Formation, SolutionCell, CellValue, Cell, SudokuStoreInitializationParams } from './types';
 

@@ -1,4 +1,4 @@
-import { SudokuSolverError, solveSudoku } from '../sudokuSolver';
+import { SudokuSolverError, solveSudoku } from '../solveSudoku';
 import { Formation, FormationDimensions } from '../types';
 
 export function checkFormation(
