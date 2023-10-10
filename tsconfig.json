@@ -3,7 +3,8 @@
     "compilerOptions": {
         "paths": {
             "@components/*": ["./src/components/*"],
-            "@storage": ["./src/storage"]
+            "@storage": ["./src/storage"],
+            "@gameEngine": ["./sudokuGameEngine"]
         },
         "sourceMap": true
     }
